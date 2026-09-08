@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Code Reviewer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🧠 AI Code Reviewer</h1>
+      <p class="subtitle">Paste a code snippet and get instant, structured feedback — like a senior dev review, in seconds.</p>
+    </header>
+
+    <main>
+      <div class="input-panel">
+        <div class="controls">
+          <label for="language">Language</label>
+          <select id="language">
+            <option value="javascript">JavaScript</option>
+            <option value="python">Python</option>
+            <option value="java">Java</option>
+            <option value="typescript">TypeScript</option>
+            <option value="go">Go</option>
+            <option value="c++">C++</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <textarea id="code" placeholder="Paste your code here..." spellcheck="false"></textarea>
+
+        <button id="reviewBtn">Review Code</button>
+        <p id="error" class="error"></p>
+      </div>
+
+      <div class="output-panel" id="output">
+        <p class="placeholder">Your review will appear here.</p>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
