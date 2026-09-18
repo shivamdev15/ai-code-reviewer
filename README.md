@@ -1,6 +1,7 @@
 # 🧠 AI Code Reviewer
 
-Beginners often write code with no feedback until a human review comes back — which can take days. This tool gives **instant, structured code review feedback** on any snippet, powered by Claude.
+Beginners often write code with no feedback until a human review comes back — which can take days. This tool gives **instant, structured code review feedback** on any snippet, powered by Google Gemini.
+**🔗 Live demo: [ai-code-reviewer-a1s7.onrender.com](https://ai-code-reviewer-a1s7.onrender.com/)** (may take 30-50 seconds to load on first visit — free tier sleeps when idle)
 
 ## What it does
 
