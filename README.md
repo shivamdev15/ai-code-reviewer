@@ -16,7 +16,7 @@ All returned as structured categories, not a wall of text — closer to how a se
 ## Tech stack
 
 - **Backend:** Node.js + Express
-- **AI:** Claude API (Anthropic)
+- **AI:** Google Gemini API (`gemini-3.6-flash`)
 - **Frontend:** Vanilla HTML/CSS/JavaScript (no framework, kept simple on purpose)
 
 ## Running it locally
@@ -25,7 +25,7 @@ All returned as structured categories, not a wall of text — closer to how a se
    ```bash
    npm install
    ```
-2. Copy `.env.example` to `.env` and add your Anthropic API key:
+2. Copy `.env.example` to `.env` and add your free Gemini API key (get one at [aistudio.google.com/apikey](https://aistudio.google.com/apikey)):
    ```bash
    cp .env.example .env
    ```

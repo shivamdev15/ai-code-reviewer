@@ -1,12 +1,12 @@
 // server.js
 // Backend for the AI Code Reviewer Tool.
-// Takes a code snippet + language, sends it to Claude with a structured
+// Takes a code snippet + language, sends it to Gemini with a structured
 // "senior code reviewer" prompt, and returns categorized feedback.
 
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const Anthropic = require('@anthropic-ai/sdk');
+const { GoogleGenAI } = require('@google/genai');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,9 +15,7 @@ app.use(cors());
 app.use(express.json({ limit: '200kb' }));
 app.use(express.static('public'));
 
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 // The system prompt is the real "product" here — it's what makes the
 // output structured and genuinely useful instead of generic chatbot text.
@@ -51,22 +49,15 @@ app.post('/api/review', async (req, res) => {
       return res.status(400).json({ error: 'Snippet is too long. Please limit to ~20,000 characters.' });
     }
 
-    const message = await anthropic.messages.create({
-      model: 'claude-sonnet-4-6',
-      max_tokens: 1500,
-      system: SYSTEM_PROMPT,
-      messages: [
-        {
-          role: 'user',
-          content: `Language: ${language || 'unspecified'}\n\nCode:\n\`\`\`\n${code}\n\`\`\``,
-        },
-      ],
+    const response = await ai.models.generateContent({
+      model: 'gemini-3.6-flash',
+      contents: `Language: ${language || 'unspecified'}\n\nCode:\n\`\`\`\n${code}\n\`\`\``,
+      config: {
+        systemInstruction: SYSTEM_PROMPT,
+      },
     });
 
-    const rawText = message.content
-      .filter((block) => block.type === 'text')
-      .map((block) => block.text)
-      .join('\n')
+    const rawText = (response.text || '')
       .trim()
       .replace(/^```json\s*/i, '')
       .replace(/```\s*$/, '');
